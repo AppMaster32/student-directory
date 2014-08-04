@@ -1,5 +1,5 @@
 
-puts "The students of my cohort at Makers Academy"
+
 students = [
 "Faisal Aydarus",
 "mayadrivermd",
@@ -25,9 +25,12 @@ students = [
  "mr. yogesh"
 ]
 
+puts "The students of my cohort at Makers Academy"
+puts "___________________________________________"
+
 students.each do | student |
 
 
 puts student
 end
-print "Overall, we have #{student_length} great students "
+print "Overall, we have #{students.length} great students "
