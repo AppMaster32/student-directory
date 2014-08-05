@@ -15,6 +15,10 @@ def print_footer
   puts "Overall, we have #{@students.length} great students"
 end
 
+def add_student(name, cohort)
+    @students << {:name => name.capitalize, :cohort => cohort}    
+end
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -23,7 +27,7 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do    
     # add the student hash to the array
-    @students << {:name => name.capitalize, :cohort => :august}    
+    add_student(name, :august)
     puts "Now we have #{@students.length} students"
     # get another name from the user
     name = gets.chomp
@@ -34,6 +38,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit" # 9 because we'll be adding more items  
 end
 
@@ -44,7 +49,16 @@ def show_students
 end
 
 
-
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line| 
+    name, cohort = line.chomp.split(',')
+    add_student(name, cohort)
+  end
+  file.close
+  puts "The names have been loaded from students.csv"
+  puts""
+end
 
 
 def save_students
@@ -56,6 +70,7 @@ def save_students
 		file.puts csv_line
 	end
 	file.close
+  puts "The names have been saved to students.csv"
 end
 	
 
@@ -70,7 +85,9 @@ def process(selection)
 
   when "3"
    save_students
-   print "The names listed have been saved"
+when "4"
+	load_students
+
 
   when "9"
     exit
